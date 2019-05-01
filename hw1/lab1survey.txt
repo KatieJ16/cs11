@@ -1,0 +1,33 @@
+CS11 Intro C++ Lab 1
+====================
+
+This is an OPTIONAL feedback survey.  You will not gain or lose any points
+for answering these questions, or not answering these questions, or being
+candid in your responses.
+
+Q1:  Approximately how long did it take for you to implement the assignment?
+
+About 1.5 hours
+
+
+Q2:  Were there parts of the assignment that were difficult and/or frustrating
+     to figure out how to do correctly?
+
+I got confused about compiling the files. It has been a while since I used a language that needs to compile. 
+
+
+Q3:  Did you find the assignment interesting to complete?
+
+Nothing in particular. Good initial place to start for c++, but this isn’t an overly exciting assignment. 
+
+
+Q4:  Do you feel that the assignment helped you deepen your understanding
+     of the C++ topics covered in the corresponding lecture?
+
+Yes, it was very logical to follow from the notes and it helped to try for myself. 
+
+
+Q5:  Are there related topics that were not covered, that you would like
+     to see covered in the future?
+
+

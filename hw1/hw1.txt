@@ -1,0 +1,19 @@
+CS11 Intro C++ Lab 1 - Questions
+================================
+
+Q1:  Are you using GNU g++ or LLVM clang++?  Show how you know this by
+     running a command on your system and including the output in this file.
+
+I am running g++. Here is the command I used
+
+$ g++ --version
+g++ (MacPorts gcc5 5.5.0_4) 5.5.0
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+Q2:  What command do you use to build your submission?
+
+The command I used to build my submission was g++ units.cpp convert.cpp, and then I ran ./a.out to actually run the program. 
+
