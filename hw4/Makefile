@@ -18,5 +18,6 @@ hw3testunits: units.cpp testbase.cpp hw3testunits.cpp
 
 clean :
 	rm -f convert hw3testunits *.o *~
+	rm -rf html
 
 .PHONY: all clean
