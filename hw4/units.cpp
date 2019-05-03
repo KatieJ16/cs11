@@ -6,27 +6,29 @@ using namespace std;
 #include <set>
 
 
-//Constructor
+/** Constructor */
 UValue::UValue(double value, string units) {
   this->value = value;
   this->units = units;
 }
-// Cleans up a UValue object.
+/** Cleans up a UValue object.*/
 UValue::~UValue() {
 // No dynamically allocated resources; nothing to do!
 }
 
-// Returns value
+/** Returns value */
 double UValue::get_value() const{
   return value;
 }
-// Returns units
+/** Returns units */
 string UValue::get_units() const{
   return units;
 }
 
 
 void UnitConverter::add_conversion(const string &from_units, const double &multiplier, const string &to_units){
+  /** adds a conversion units to the list*/
+
   //make the conversion unit
   Conversion this_one = {(string) from_units, (double) multiplier, (string) to_units};
 
@@ -49,6 +51,9 @@ void UnitConverter::add_conversion(const string &from_units, const double &multi
 }
 
 UValue UnitConverter::convert_to(const UValue &input, const string &to_units, std::set<string> seen){
+  /** converts from one unit to another, uses recursion to go from
+  * units that we don't have direct convesions to
+  */
   //check to see if we've seen this unit before
   if(input.get_units() == to_units){
     return input;
@@ -97,5 +102,6 @@ UValue UnitConverter::convert_to(const UValue &input, const string &to_units, st
 }
 
 UValue UnitConverter::convert_to(const UValue &v, const string &to_units) {
+    /** start recursion for conversion */
     return convert_to(v, to_units, set<string>{});
 }

@@ -9,7 +9,7 @@ using namespace std;
 #include <set>
 
 
-//add all the needed conversions
+/** function to add all the needed conversions*/
 UnitConverter init_converter(){
   UnitConverter conversion;
 
@@ -41,6 +41,7 @@ UnitConverter init_converter(){
 // main loop of code
 int main(){
 
+  /** run the main loop */
   UnitConverter u;
   //make list of conversions
   try{
@@ -63,13 +64,13 @@ int main(){
   UValue input = UValue(value, units);
 
 
-  //Convert and print
+  /** Convert and print the result */
   try{
     std::set<string> seen;
     UValue output = u.convert_to(input, to_units, seen);
     cout << "Converted to: " << output.get_value() << " " << output.get_units() << "\n";
   }
-  catch(int e){ //when you can't convert
+  catch(int e){ /** what to do when you can't convert */
     cout << "Couldn't convert to " << to_units <<"!\n";
     return 1;
 
