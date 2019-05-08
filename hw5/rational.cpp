@@ -21,6 +21,12 @@ Rational::Rational(int n, int d){
   }
   this->n = n;
   this->d = d;
+
+  //make denominator positive
+  if (d < 0){
+    this->n *= -1;
+    this->d *= -1;
+  }
 }
 // Cleans up a Rational object.
 Rational::~Rational() {
@@ -129,9 +135,15 @@ Rational & Rational::operator*=(const Rational &num2){
 }
 
 Rational & Rational::operator/=(const Rational &num2){
+  //check that we aren't diving by zero
+  if (num2.num()==0){
+    throw std::invalid_argument("Cannot divide by 0");
+  }
   //cross multiply
-  n *= num2.denom();
-  d *= num2.num();
+  int numerator = n * num2.denom();
+  int denominator = d * num2.num();
+  n = numerator;
+  d = denominator;
 
   //reduce and return
   reduce();
@@ -184,12 +196,8 @@ Rational operator/(const Rational &num1, const Rational &num2){
 
 ostream & operator << (ostream &out, const Rational &num)
 {
-    if(num.num() == 1){
-      out << 1;
-      return out;
-    }
-    if (num.num() == 0){
-      out << 0;
+    if(num.denom() == 1){
+      out << num.num();
       return out;
     }
     out << num.num() << "/" << num.denom();

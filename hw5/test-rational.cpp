@@ -123,20 +123,20 @@ void test_compound_operators(TestContext &ctx) {
     r /= Rational(2);
     ctx.CHECK(r.num() == 3 && r.denom() == 10);
     ctx.result();
-    
+
     ctx.DESC("Rational operator /= self-assignment");
     r = Rational(4, 5);
     r /= r;
     ctx.CHECK(r.num() == 1 && r.denom() == 1);
     ctx.result();
-    
+
     // Make sure division will properly reduce the result.
     ctx.DESC("Rational operator /= reduces fractions");
     r = Rational(4, 5);
     r /= Rational(2, 5);
     ctx.CHECK(r.num() == 2 && r.denom() == 1);
     ctx.result();
-    
+
     ctx.DESC("Rational operator /= throws on divide-by-zero");
     r = Rational(4, 5);
     bool pass = false;
@@ -158,7 +158,7 @@ void test_compound_operators(TestContext &ctx) {
 void test_simple_arithmetic(TestContext &ctx) {
     Rational r;
     bool pass = false;
-    
+
     ctx.DESC("Rational operator +");
 
     // 5 + (-3)
@@ -241,19 +241,19 @@ void test_reciprocal_reduce(TestContext &ctx) {
     bool pass;
 
     ctx.DESC("Reciprocal operation");
-    
+
     r = Rational(2, 5);
     ctx.CHECK(r.num() == 2 && r.denom() == 5);
     r = r.reciprocal();
     ctx.CHECK(r.num() == 5 && r.denom() == 2);
-    
+
     r = Rational(5);
     ctx.CHECK(r.num() == 5 && r.denom() == 1);
     r = r.reciprocal();
     ctx.CHECK(r.num() == 1 && r.denom() == 5);
-    
+
     ctx.result();
-    
+
     ctx.DESC("Reciprocal of 0 should throw");
     r = Rational(0);
     pass = false;
@@ -268,7 +268,7 @@ void test_reciprocal_reduce(TestContext &ctx) {
         pass = false;
     }
     ctx.CHECK(pass);
-    
+
     ctx.result();
 
     ctx.DESC("Reduce operation");
@@ -349,25 +349,25 @@ void test_casting(TestContext &ctx) {
     Rational r;
 
     ctx.DESC("Implicit casting from int to Rational");
-    
+
     r = 62;
     ctx.CHECK(r.num() == 62 && r.denom() == 1);
-    
-    ctx.result(); 
+
+    ctx.result();
 }
 
 
 void test_stream_output(TestContext &ctx) {
     Rational r;
     stringstream sstream;
-    
+
     ctx.DESC("Stream-output of a whole number");
     r = Rational(31);
     sstream.str("");
     sstream << r;
     ctx.CHECK(sstream.str() == "31");
     ctx.result();
-    
+
     ctx.DESC("Stream-output of zero");
     r = Rational();
     sstream.str("");
@@ -386,7 +386,7 @@ void test_stream_output(TestContext &ctx) {
 
 /*! This program is a simple test-suite for the Rational class. */
 int main() {
-  
+
     cout << "Testing the Rational class." << endl << endl;
 
     TestContext ctx(cout);
@@ -398,8 +398,7 @@ int main() {
     // test_comparison(ctx);
     test_casting(ctx);
     test_stream_output(ctx);
-    
+
     // Return 0 if everything passed, nonzero if something failed.
     return !ctx.ok();
 }
-
