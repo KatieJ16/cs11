@@ -37,5 +37,3 @@ class UnitConverter{
     UValue convert_to(const UValue &v, const string &to_units);
 
 };
-
-// UValue convert_to(UValue input, string to_units);

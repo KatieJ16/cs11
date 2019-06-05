@@ -1,4 +1,4 @@
-all : convert hw3testunits
+all : convert hw3testunits doxygen
 
 convert : units.o convert.o
 	g++ -std=c++14 -Wall units.o convert.o -o convert
@@ -15,9 +15,14 @@ hw3testunits.o : hw3testunits.cpp testbase.h
 hw3testunits: units.cpp testbase.cpp hw3testunits.cpp
 	g++ -std=c++14 -Wall -Werror units.cpp testbase.cpp hw3testunits.cpp -o hw3testunits
 
+test: hw3testunits
+	./hw3testunits
+
+doxygen:
+	doxygen -g Doxyfile
 
 clean :
 	rm -f convert hw3testunits *.o *~
 	rm -rf html
 
-.PHONY: all clean
+.PHONY: all clean doxygen

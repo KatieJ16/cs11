@@ -69,10 +69,9 @@ int main(){
     UValue output = u.convert_to(input, to_units, seen);
     cout << "Converted to: " << output.get_value() << " " << output.get_units() << "\n";
   }
-  catch(int e){ //when you can't convert
+  catch (const std::invalid_argument& ia){ //when you can't convert
     cout << "Couldn't convert to " << to_units <<"!\n";
     return 1;
-
   }
 
   return 0;

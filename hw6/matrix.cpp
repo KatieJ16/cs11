@@ -75,7 +75,11 @@ Matrix::Matrix(const Matrix &m){
 
 }
 
-Matrix& Matrix::operator=( const Matrix& other ) {
+Matrix& Matrix::operator=( const Matrix &other ) {
+  //Detect and handle self-assignment
+  if(this == &other)
+    return *this;
+    
   //Release old memory
   for(int i = 0; i < rows; i++)
       delete[] matrix[i];
@@ -99,79 +103,79 @@ Matrix& Matrix::operator=( const Matrix& other ) {
   //Return non-const reference to myself
   return *this;
 
+}
+
+int Matrix::numRows() const{
+  return rows;
+}
+int Matrix::numCols() const{
+    return cols;
+}
+int Matrix::get(int r, int c) const{
+  //r and c can't be larger than size
+  if((r >= this->rows) || (c >= this->cols)){
+    throw std::invalid_argument("row and columns not valid");
   }
 
-  int Matrix::numRows() const{
-    return rows;
-  }
-  int Matrix::numCols() const{
-      return cols;
-  }
-  int Matrix::get(int r, int c) const{
-    //r and c can't be larger than size
-    if((r >= this->rows) || (c >= this->cols)){
-      throw std::invalid_argument("row and columns not valid");
-    }
-
-    //cant be negative
-    if((r < 0) || (c < 0)){
-      throw std::invalid_argument("row and columns not valid");
-    }
-
-      return matrix[r][c];
-  }
-  int Matrix::set(int r, int c, int value){
-    //r and c can't be larger than size
-    if((r >= this->rows) || (c >= this->cols)){
-      throw std::invalid_argument("row and columns not valid");
-    }
-
-    //cant be negative
-    if((r < 0) || (c < 0)){
-      throw std::invalid_argument("row and columns not valid");
-    }
-
-    matrix[r][c] = value;
-    return 0;
-
+  //cant be negative
+  if((r < 0) || (c < 0)){
+    throw std::invalid_argument("row and columns not valid");
   }
 
-  //Redefine equals
-  bool Matrix::operator==(const Matrix &mat2){
-    //they are not equal if different sizes
-    if((this->rows != mat2.numRows())|| (this->cols != mat2.numCols())){
-      return false;
-    }
-    //If they are the same size, check that every element is the same
-    //and return false if any are different
-    for(int i = 0; i < this->rows; i ++){
-      for(int j = 0; j < this->cols; j ++){
-        if(this->matrix[i][j] != mat2.get(i,j)){
-          return false;
-        }
-      }
-    }
-
-    return true;
+    return matrix[r][c];
+}
+int Matrix::set(int r, int c, int value){
+  //r and c can't be larger than size
+  if((r >= this->rows) || (c >= this->cols)){
+    throw std::invalid_argument("row and columns not valid");
   }
 
-  //Redefine not equals
-  bool Matrix::operator!=(const Matrix &mat2){
-    //exact same as == but switch when to return truw and false
+  //cant be negative
+  if((r < 0) || (c < 0)){
+    throw std::invalid_argument("row and columns not valid");
+  }
 
-    //they are not equal if different sizes
-    if((this->rows != mat2.numRows())|| (this->cols != mat2.numCols())){
-      return true;
-    }
-    //If they are the same size, check that every element is the same
-    //and return false if any are different
-    for(int i = 0; i < this->rows; i ++){
-      for(int j = 0; j < this->cols; j ++){
-        if(this->matrix[i][j] != mat2.get(i,j)){
-          return true;
-        }
-      }
-    }
+  matrix[r][c] = value;
+  return 0;
 
+}
+
+//Redefine equals
+bool Matrix::operator==(const Matrix &mat2){
+  //they are not equal if different sizes
+  if((this->rows != mat2.numRows())|| (this->cols != mat2.numCols())){
     return false;
   }
+  //If they are the same size, check that every element is the same
+  //and return false if any are different
+  for(int i = 0; i < this->rows; i ++){
+    for(int j = 0; j < this->cols; j ++){
+      if(this->matrix[i][j] != mat2.get(i,j)){
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+//Redefine not equals
+bool Matrix::operator!=(const Matrix &mat2){
+  //exact same as == but switch when to return truw and false
+
+  //they are not equal if different sizes
+  if((this->rows != mat2.numRows())|| (this->cols != mat2.numCols())){
+    return true;
+  }
+  //If they are the same size, check that every element is the same
+  //and return false if any are different
+  for(int i = 0; i < this->rows; i ++){
+    for(int j = 0; j < this->cols; j ++){
+      if(this->matrix[i][j] != mat2.get(i,j)){
+        return true;
+      }
+    }
+  }
+
+  return false;
+}

@@ -6,7 +6,11 @@ using namespace std;
 #include <set>
 
 
-/** Constructor */
+/** Constructor
+  * makes a Uvalue object
+  * @param value the value to store
+  * @param units a string of the name of the units
+*/
 UValue::UValue(double value, string units) {
   this->value = value;
   this->units = units;
@@ -16,18 +20,26 @@ UValue::~UValue() {
 // No dynamically allocated resources; nothing to do!
 }
 
-/** Returns value */
+/** Returns value
+  * @return value the value of the UValue object
+*/
 double UValue::get_value() const{
   return value;
 }
-/** Returns units */
+/** Returns units
+  * @return units the name of the UValue units
+*/
 string UValue::get_units() const{
   return units;
 }
 
 
 void UnitConverter::add_conversion(const string &from_units, const double &multiplier, const string &to_units){
-  /** adds a conversion units to the list*/
+  /** adds a conversion units to the list
+    * @param from_units the name of the units you
+    * @param multiplier the multiplier to convert to the new units
+    * @param to_units the units that you want to go to
+  */
 
   //make the conversion unit
   Conversion this_one = {(string) from_units, (double) multiplier, (string) to_units};
@@ -53,6 +65,9 @@ void UnitConverter::add_conversion(const string &from_units, const double &multi
 UValue UnitConverter::convert_to(const UValue &input, const string &to_units, std::set<string> seen){
   /** converts from one unit to another, uses recursion to go from
   * units that we don't have direct convesions to
+  * @param input a UValue variable of the number and units you are starting from
+  * @param to_units the units that you want to go to
+  * @param seen a list of the units we've already seen
   */
   //check to see if we've seen this unit before
   if(input.get_units() == to_units){
@@ -102,6 +117,10 @@ UValue UnitConverter::convert_to(const UValue &input, const string &to_units, st
 }
 
 UValue UnitConverter::convert_to(const UValue &v, const string &to_units) {
-    /** start recursion for conversion */
+    /** start recursion for conversion
+    * @param v value that you are starting with
+    * @param to_units units you want to go to
+    * @return UValue of the converted units
+    */
     return convert_to(v, to_units, set<string>{});
 }

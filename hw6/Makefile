@@ -1,4 +1,4 @@
-all : test
+all : test_make
 
 
 matrix.o : matrix.cpp matrix.h
@@ -10,11 +10,13 @@ testbase.o : testbase.cpp testbase.h
 test-matrix.o : test-matrix.cpp testbase.h matrix.h
 	g++ -std=c++14 -Wall -c test-matrix.cpp
 
-test: matrix.o testbase.o test-matrix.o
+test_make: matrix.o testbase.o test-matrix.o
 	g++ -std=c++14 -Wall -Werror matrix.o testbase.o test-matrix.o -o test
-
 
 clean :
 	rm -f test *.o *~
 
-.PHONY: all clean
+test: test_make
+	./test
+
+.PHONY: all clean test
